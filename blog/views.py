@@ -5,6 +5,7 @@ from django.core.paginator import Paginator
 from django.core.serializers import serialize
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, get_object_or_404
+from django.views.generic import ListView
 
 from blog.models import Post
 
@@ -30,3 +31,9 @@ def post_detail(request, year, month, day, post):
     )
 
     return HttpResponse(serializers.serialize('json', _post))
+
+
+class PostListView(ListView):
+    queryset = Post.published.all()
+    context_object_name = 'posts'
+    paginate_by = 3
