@@ -26,7 +26,6 @@ class Post(models.Model):
     slug = models.SlugField(
         max_length=250,
         unique_for_date='publish',
-
     )
     body = models.TextField()
     status = models.CharField(
